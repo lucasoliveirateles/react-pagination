@@ -81,7 +81,6 @@ const Table: React.FC = (props) => {
             {pages && pages.map(page => (
               <PaginationItem 
                 key={page} 
-                isSelect={currentPage === page}
                 onClick={() => setCurrentPage(page)}
               >{page}
               </PaginationItem>
