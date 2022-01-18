@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const Page = styled.table`
+  min-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const Table = styled.table`
   width: 500px;
   border-collapse: collapse;
@@ -26,9 +34,10 @@ export const Table = styled.table`
 `;
 
 export const Pagination = styled.div`
-  display: flex;
   min-width: 500px;
-  justify-content: space-between;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
 `;
 
 export const PaginationButton = styled.div`
