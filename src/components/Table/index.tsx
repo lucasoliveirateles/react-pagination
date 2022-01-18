@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types'
 
 import api from '../../services/api';
 
 import { 
+  Page,
   Table as ProductTable, 
   Pagination, 
   PaginationButton,
@@ -16,7 +16,7 @@ type Product = {
   price:  number;
 }
 
-const Table: React.FC = (props) => {
+const Table: React.FC = () => {
   const [products, setProducts] = useState<Product[]>();
   const [total, setTotal] = useState(0);  
   const [limit, setLimit] = useState(5); 
@@ -54,7 +54,7 @@ const Table: React.FC = (props) => {
   }, [limit, total, currentPage]);
 
   return (
-    <>
+    <Page>
       <h3>Product Tables</h3>
       <ProductTable>
         <thead>
@@ -77,18 +77,22 @@ const Table: React.FC = (props) => {
       <Pagination>
         <div>Ammount {total}</div>
         <PaginationButton>
-          <PaginationItem>Previous</PaginationItem>
-            {pages && pages.map(page => (
-              <PaginationItem 
-                key={page} 
-                onClick={() => setCurrentPage(page)}
-              >{page}
-              </PaginationItem>
-            ))}
-          <PaginationItem>Previous</PaginationItem>
+          {currentPage > 1 && (
+            <PaginationItem onClick={() => setCurrentPage(currentPage - 1)}>Previous</PaginationItem>
+          )}
+          {pages && pages.map(page => (
+            <PaginationItem 
+              key={page} 
+              onClick={() => setCurrentPage(page)}
+            >{page}
+            </PaginationItem>
+          ))}
+          {pages?.length && currentPage < pages.length && (
+            <PaginationItem onClick={() => setCurrentPage(currentPage + 1)}>Next</PaginationItem>
+          )}
         </PaginationButton>
       </Pagination>
-    </>
+    </Page>
   );
 }
 
